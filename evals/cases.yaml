@@ -1,0 +1,14 @@
+# Each case = a real posting + what an honest answer MUST flag and MUST NOT claim.
+# Fill these from the gap analyses we did for each application (~20 postings).
+
+- posting: data/postings/sample_data_manager.txt
+  expected_gaps: ["Fabric", "Unity Catalog"]     # must appear in the gaps list
+  must_not_claim: ["Fabric", "Unity Catalog"]    # must not appear in any bullet/summary
+
+# - posting: data/postings/ey_senior_manager_data_ai.txt
+#   expected_gaps: ["Fabric", "Asset Bundles", "Unity Catalog"]
+#   must_not_claim: ["Fabric", "Asset Bundles"]
+#
+# - posting: data/postings/15_years_director.txt
+#   expected_gaps: ["15"]
+#   must_not_claim: ["15+ years", "15 years"]

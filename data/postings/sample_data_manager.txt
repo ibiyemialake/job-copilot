@@ -1,0 +1,12 @@
+Data Team Manager — Toronto (Hybrid)
+
+We're looking for a Data Team Manager to lead a team of 6 data engineers and analysts.
+
+Requirements:
+- 7+ years in data engineering or data science, including 2+ years leading teams
+- Hands-on experience with Databricks (Unity Catalog, Delta Lake) and Microsoft Fabric
+- Strong Python and SQL
+- Experience establishing data governance and data quality standards
+- Experience delivering ML or AI features in production
+- Stakeholder management across technical and non-technical teams
+- PMP or Agile certification an asset

@@ -1,0 +1,42 @@
+# YOUR EVIDENCE BANK — the only thing the copilot is allowed to claim.
+# One fact per item. Keep numbers exact. If it isn't here, the tool can't say it.
+# Seeded from your recent CVs. CHECK EVERY LINE and fix anything marked TODO.
+
+- id: CA-01
+  role: Data Standards Technical Lead, Common Approach to Impact Measurement
+  text: Technical lead for a cross-functional team of 9, setting technical direction and roadmap and reviewing implementation work for the Common Impact Data Standard (CIDS).
+
+- id: CA-02
+  role: Data Standards Technical Lead, Common Approach to Impact Measurement
+  text: Own outcomes for a data standard adopted by 107 organizations, including 22 funders and investors and 5 software platforms.
+
+- id: CA-03
+  role: Data Standards Technical Lead, Common Approach to Impact Measurement
+  text: Manage RDF/ontology infrastructure, codelist repositories, and GitHub-based workflows for a semantic data standard.
+
+- id: CA-04
+  role: Data Standards Technical Lead, Common Approach to Impact Measurement
+  text: Lead development of Microsoft Excel and Airtable extensions that let practitioners work with the data standard.
+
+- id: MP-01
+  role: AI Engineering Lead, Motopay
+  text: Led a 7-person AI engineering team that shipped ML features lifting product adoption by 25% and user satisfaction by 15%.
+
+- id: XX-01   # TODO: confirm which role this belongs to, then rename the id
+  role: TODO
+  text: Spearheaded a credit model and loan recommendation engine that reduced manual underwriting time by 35%.
+
+- id: XX-02   # TODO: confirm which role this belongs to, then rename the id
+  role: TODO
+  text: Built churn and propensity models that improved customer retention by 27%.
+
+- id: ED-01
+  role: Education
+  text: M.Sc. in Computer Science (Artificial Intelligence).
+
+- id: CERT-01
+  role: Certifications
+  text: PMP, Certified ScrumMaster (CSM), and ISO/IEC 27001 Lead Implementer certifications.
+
+# Add 20–40 more: Terragon, Kodobe, tools you've used in production (Python, SQL,
+# Spark, etc.), each with the role it came from. Specific beats general.
