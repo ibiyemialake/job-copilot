@@ -18,6 +18,10 @@
   role: Data Standards Technical Lead, Common Approach to Impact Measurement
   text: Lead development of Microsoft Excel and Airtable extensions that let practitioners work with the data standard.
 
+- id: CA-05
+  role: Data Standards Technical Lead, Common Approach to Impact Measurement
+  text: Built Microsoft Fabric reports and dashboards for funds of funds and ESDC (Employment and Social Development Canada), analysing $10M in investment.
+
 - id: MP-01
   role: AI Engineering Lead, Motopay
   text: Led a 7-person AI engineering team that shipped ML features lifting product adoption by 25% and user satisfaction by 15%.

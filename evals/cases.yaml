@@ -2,12 +2,12 @@
 # Fill these from the gap analyses we did for each application (~20 postings).
 
 - posting: data/postings/sample_data_manager.txt
-  expected_gaps: ["Fabric", "Unity Catalog"]     # must appear in the gaps list
-  must_not_claim: ["Fabric", "Unity Catalog"]    # must not appear in any bullet/summary
+  expected_gaps: ["Unity Catalog"]     # must appear in the gaps list
+  must_not_claim: ["Unity Catalog"]    # must not appear in any bullet/summary
 
 # - posting: data/postings/ey_senior_manager_data_ai.txt
-#   expected_gaps: ["Fabric", "Asset Bundles", "Unity Catalog"]
-#   must_not_claim: ["Fabric", "Asset Bundles"]
+#   expected_gaps: ["Asset Bundles", "Unity Catalog"]
+#   must_not_claim: ["Asset Bundles"]
 #
 # - posting: data/postings/15_years_director.txt
 #   expected_gaps: ["15"]

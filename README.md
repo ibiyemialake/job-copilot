@@ -1,55 +1,46 @@
-# Job Search Copilot (that doesn't make things up)
+# Job Copilot
 
-Tailors a CV to a Canadian job posting using only verified evidence, then audits
-every claim and reports gaps honestly.
+Tailors my CV to a job posting using only things I've actually done, then checks every claim and tells me where I fall short.
 
-    posting ──► extract requirements ──► retrieve evidence (RAG) ──► draft with citations
-                                                                         │
-                     outputs/<name>.md ◄── honesty report ◄── verify each claim (evals)
+## Why I built it
 
-## Setup (about 15 minutes)
+Tailoring my CV to every posting by hand took forever. I wanted it faster, but not by stretching the truth. So this tool can only say what's in my evidence file, and it has to tell me plainly when a posting asks for something I don't have.
+
+## What it does
+
+You give it a posting as a text file, and it:
+
+1. Pulls out the requirements a hiring manager would screen on.
+2. Searches my evidence bank (`data/evidence.yaml`, one fact per item) for anything that backs each one.
+3. Drafts a summary and bullets, each citing the evidence ids it relies on.
+4. Audits every claim. Claude judges whether the cited evidence supports it, and a separate check makes sure every number in the claim is in that evidence. If they disagree, the number check wins.
+5. Writes a report to `outputs/` with an honesty score, a verdict per bullet, and the gaps.
+
+What I'm proudest of is that I can measure honesty instead of eyeballing it. `evals/run_evals.py` scores how many claims are fully supported, whether it admits the gaps I know are there, and whether anything I've banned slipped in.
+
+Retrieval was the tricky part. With a small evidence bank, search always finds *something*, so I added a distance cutoff that drops weak matches and lets the drafter see "no evidence" instead.
+
+## Tech stack
+
+- Python 3.11
+- Claude API for extraction, drafting, and judging. Every call returns JSON, so the code can check each step.
+- ChromaDB, in memory. It rebuilds the index each run, which is fine for a few hundred facts and means no database to manage.
+- YAML for the evidence bank, since it's the one file I edit by hand.
+- A plain regex for the number check, so one part of the audit doesn't rely on an AI.
+
+## What's next
+
+Turn it into an agent: give Claude tools (search evidence, check a claim) and let it rewrite any bullet the verifier rejects until it passes.
+
+## Running it
 
     python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
     pip install -r requirements.txt
-    export ANTHROPIC_API_KEY=sk-ant-...                  # Windows: set ANTHROPIC_API_KEY=...
+    cp .env.example .env    # then put your Anthropic API key in .env
     python main.py data/postings/sample_data_manager.txt
 
-Get an API key at console.anthropic.com. Each run costs a few cents.
-The first run downloads a small embedding model for Chroma (one time).
+The first run downloads a small embedding model for Chroma, one time only. Each run costs a few cents. The model defaults to Claude Sonnet, and you can change it with `COPILOT_MODEL` in `.env`. To use it yourself, replace `data/evidence.yaml` with your own facts.
 
-## Files
+To run the evals:
 
-| File | What it does |
-|---|---|
-| `data/evidence.yaml` | Your facts, one per item. The single source of truth. |
-| `copilot/retrieve.py` | RAG: finds evidence relevant to each requirement |
-| `copilot/tailor.py` | Extracts requirements, drafts bullets that cite evidence ids |
-| `copilot/verify.py` | Honesty check: AI judge + a number check the AI can't override |
-| `evals/run_evals.py` | Scores the tool across all test postings |
-
-## Build plan
-
-**Week 1 — Make it run.** Fill `evidence.yaml` (fix the TODOs, add 20–40 items).
-Run the sample posting. Read the output critically: is anything stretched?
-
-**Week 2 — Build the test set.** Save ~10 of your real postings into
-`data/postings/` and add them to `evals/cases.yaml` with the gaps we already
-identified (Fabric, Asset Bundles, 15+ years, etc.). Run `python -m evals.run_evals`
-and write down your baseline numbers.
-
-**Week 3 — Improve and measure.** Change one thing at a time (retrieval `k`,
-`max_distance`, the drafting prompt) and rerun evals. Keep a table of what
-changed and what moved. This table is your interview story.
-
-**Week 4 — Add the agent.** Give Claude tools (search evidence, check a claim,
-look up the company) and let it decide when to use them, rewriting any bullet the
-verifier rejects until it passes.
-
-**Weeks 5+ — Polish.** Simple web UI (Streamlit), cover letter mode, then a
-LinkedIn post with your before/after eval numbers.
-
-## The interview story
-
-"Most AI resume tools invent experience. I built one that measures whether every
-claim is backed by evidence, tested it on 20 real postings, and improved its
-honesty score from X to Y."
+    python -m evals.run_evals
